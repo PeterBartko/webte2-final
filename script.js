@@ -8,8 +8,8 @@ function sleep(milliseconds) {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
-document.querySelector('button').onclick = () => {
-    fetch(`api.php?apikey=1234567890&r=${document.querySelector('input').value}`).then(res => res.json()).then(jsondata => {
+document.getElementById('r-button').onclick = () => {
+    fetch(`api.php?apikey=1234567890&r=${document.getElementById('r-input').value}`).then(res => res.json()).then(jsondata => {
         i = 0
         dataJson = jsondata
         if(dataJson.length === 0){
@@ -19,7 +19,7 @@ document.querySelector('button').onclick = () => {
         fun();
         simulation.start();
         if(i !== 0){
-            r = document.querySelector('input').value
+            r = document.getElementById('r-input').value
         }
     })
 }
