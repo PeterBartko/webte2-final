@@ -195,7 +195,7 @@ var graphics = (function() {
 
     function drawScene(position, positionCar) {
         context.clearRect(0, 0, canvas.width, canvas.height);
-        drawMiddleLine();
+        // drawMiddleLine();
         // drawSpring(position);
         drawBox(positionCar);
         drawBoxCar(position)
