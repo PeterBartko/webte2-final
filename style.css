@@ -11,9 +11,10 @@
 
 
 body{
-    width: 100%;
+    min-height: 100vh;
     display: flex;
-    flex-direction: column;
+    /*flex-direction: column;*/
+    justify-content: center;
     align-items: center;
 }
 
@@ -23,6 +24,13 @@ form{
     flex-direction: column;
     background-color: slategrey;
 
+}
+
+.HarmonicOscillator{
+    width: 100%;
+    /*margin-right: 2vh;*/
+    background-color: slategrey;
+    transform: rotate(-270deg);
 }
 
 /*form *{*/
