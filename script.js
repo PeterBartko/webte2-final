@@ -1,19 +1,142 @@
+
+var r = 0;
 var dataJson;
 var i = -1;
+let chart;
 
+function sleep(milliseconds) {
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
 
 document.querySelector('button').onclick = () => {
     fetch(`api.php?apikey=1234567890&r=${document.querySelector('input').value}`).then(res => res.json()).then(jsondata => {
         i = 0
         dataJson = jsondata
+        if(dataJson.length === 0){
+            return
+        }
+        console.log(dataJson)
+        fun();
         simulation.start();
+        if(i !== 0){
+            r = document.querySelector('input').value
+        }
     })
 }
 
+async function fun() {
+    document.getElementById('myChart').remove();
+    let canvas = document.createElement('canvas');
+    canvas.id = 'myChart';
+    canvas.style.maxHeight = '800px';
+    document.getElementById('graph-div').append(canvas);
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    const data = {
+        labels: [],
+        datasets: [
+            {
+                label: 'auto',
+                data: [],
+                pointRadius: 0,
+                hidden: false,
+                fill: false,
+                borderColor: 'blue',
+                tension: 0,
+                showLine: true
+            },
+            {
+                label: 'koleso',
+                data: [],
+                hidden: false,
+                fill: false,
+                borderColor: 'red',
+                tension: 0,
+                showLine: true
+            }
+        ]
+    }
+
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: data,
+        options: {
+            elements: {
+                point: {
+                    radius: 0
+                }
+            }
+        }
+    });
+
+    chart = myChart
+
+
+    // for (let i = 0; i < dataJson.length; i++) {
+    //     myChart.data.labels.push(dataJson[i].t);
+    //     myChart.data.datasets[0].data.push(dataJson[i].x1);
+    //     myChart.data.datasets[1].data.push(dataJson[i].y);
+    //     await sleep(100);
+    //     myChart.update();
+    // }
+}
+
+// async function fun() {
+//     document.getElementById('myChart').remove();
+//     let canvas = document.createElement('canvas');
+//     canvas.id = 'myChart';
+//     canvas.style.maxHeight = '800px';
+//     document.getElementById('graph-div').append(canvas);
+//     const data = {
+//         labels: [],
+//         datasets: [
+//             {
+//                 label: 'auto',
+//                 data: [],
+//                 pointRadius: 0,
+//                 hidden: false,
+//                 fill: false,
+//                 borderColor: 'blue',
+//                 tension: 0,
+//                 showLine: true
+//             },
+//             {
+//                 label: 'koleso',
+//                 data: [],
+//                 hidden: false,
+//                 fill: false,
+//                 borderColor: 'red',
+//                 tension: 0,
+//                 showLine: true
+//             }
+//         ]
+//     }
+//     const ctx = document.getElementById('myChart').getContext('2d');
+//     const myChart = new Chart(ctx, {
+//         type: 'line',
+//         data: data,
+//         options: {
+//             elements: {
+//                 point: {
+//                     radius: 0
+//                 }
+//             }
+//         }
+//     });
+//     for (let i = 0; i < dataJson.length; i++) {
+//         myChart.data.labels.push(dataJson[i].t);
+//         myChart.data.datasets[0].data.push(dataJson[i].x1);
+//         myChart.data.datasets[1].data.push(dataJson[i].y);
+//         await sleep(100);
+//         myChart.update();
+//     }
+// }
+
 var physics = (function() {
     var initialConditions = {
-        position:       0.15,
-        positionCar:    0.0,
+        position:       0.1,
+        positionCar:    0.1,
         springConstant: 100.0
     };
 
@@ -32,10 +155,22 @@ var physics = (function() {
 
     function updatePosition() {
         i++;
-        // console.log(dataJson[i].y)
-        state.positionCar =(state.position + parseFloat(dataJson[i].y)*(-1));
-        state.position = ((parseFloat(dataJson[i].x1))*(-1)+0.1);
+        // console.log()
+        console.log(dataJson[i].x1)
+        state.positionCar =(state.position + parseFloat(dataJson[i].y)*(-1)) + r;
+        state.position = ((parseFloat(dataJson[i].x1))*(-1)+0.1) + r;
 
+        // for (let i = 0; i < dataJson.length; i++) {
+        //     myChart.data.labels.push(dataJson[i].t);
+        //     myChart.data.datasets[0].data.push(dataJson[i].x1);
+        //     myChart.data.datasets[1].data.push(dataJson[i].y);
+        //     await sleep(100);
+        //     myChart.update();
+        // }
+        chart.data.labels.push(dataJson[i].t);
+        chart.data.datasets[0].data.push(dataJson[i].x1);
+        chart.data.datasets[1].data.push(dataJson[i].y);
+        chart.update();
 
         // if (state.position > 1) { state.position = 1; }
         // if (state.position < -1) { state.position = -1; }
@@ -162,14 +297,14 @@ var graphics = (function() {
         var boxTopY = Math.floor((canvasHeight - boxSize) / 2);
         var startX = boxMiddleX(position) - boxSize / 2;
 
-        context.beginPath();
-        context.fillStyle = colors.shade60;
-        context.fillRect(startX, boxTopY, boxSize, boxSize);
+        // context.beginPath();
+        // context.fillStyle = colors.shade60;
+        // context.fillRect(startX, boxTopY, boxSize, boxSize);
 
-        context.beginPath();
-        context.lineWidth = 1;
-        context.strokeStyle = colors.shade30;
-        context.strokeRect(startX + 0.5, boxTopY + 0.5, boxSize - 1, boxSize - 1);
+        // context.beginPath();
+        // context.lineWidth = 1;
+        // context.strokeStyle = colors.shade30;
+        // context.strokeRect(startX + 0.5, boxTopY + 0.5, boxSize - 1, boxSize - 1);
 
         context.beginPath();
         context.strokeStyle = "black";
@@ -231,13 +366,13 @@ var graphics = (function() {
     };
 })();
 
+
+
 var simulation = (function() {
-    function sleep(milliseconds) {
-        return new Promise(resolve => setTimeout(resolve, milliseconds));
-    }
+
 
     async function animate() {
-        await sleep(100)
+        await sleep(20)
         physics.updatePosition();
         graphics.drawScene(physics.state.position, physics.state.positionCar);
         if(i < 500){
@@ -246,15 +381,18 @@ var simulation = (function() {
     }
 
     function start() {
-        graphics.init(function() {
+        graphics.init(async function () {
             physics.resetStateToInitialConditions();
-            // graphics.drawScene(physics.state.position, physics.state.positionCar);
-            window.addEventListener('resize', function(event){
+            graphics.drawScene(physics.state.position, physics.state.positionCar);
+            window.addEventListener('resize', function (event) {
                 graphics.fitToContainer();
                 graphics.drawScene(physics.state.position);
             });
-            if(i > -1){
-                animate();
+            if (i > -1) {
+                await sleep(1000)
+                {
+                    animate();
+                }
             }
         });
     }
@@ -264,6 +402,9 @@ var simulation = (function() {
     };
 })();
 
-simulation.start();
-graphics.drawScene(physics.state.position, physics.state.positionCar);
+
+
+
+// simulation.start();
+// graphics.drawScene(physics.state.position, physics.state.positionCar);
 
