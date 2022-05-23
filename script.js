@@ -12,7 +12,7 @@ document.querySelector('button').onclick = () => {
 
 var physics = (function() {
     var initialConditions = {
-        position:       0.0,
+        position:       0.15,
         positionCar:    0.0,
         springConstant: 100.0
     };
@@ -26,21 +26,30 @@ var physics = (function() {
     };
 
     function resetStateToInitialConditions() {
-        state.position = initialConditions.position;
         state.positionCar = initialConditions.positionCar;
+        state.position = initialConditions.position;
     }
 
     function updatePosition() {
         i++;
-        state.position = parseFloat(dataJson[i].y)*(-1);
-        state.positionCar = (parseFloat(dataJson[i].x1))*(-1)+0.1;
+        // console.log(dataJson[i].y)
+        state.positionCar =(state.position + parseFloat(dataJson[i].y)*(-1));
+        state.position = ((parseFloat(dataJson[i].x1))*(-1)+0.1);
+
+
         // if (state.position > 1) { state.position = 1; }
         // if (state.position < -1) { state.position = -1; }
+    }
+
+    function lastPosition(){
+        // state.positionCar = parseFloat(dataJson[i].y)*(-1);
+        state.position = 0.1;
     }
 
     return {
         resetStateToInitialConditions: resetStateToInitialConditions,
         updatePosition: updatePosition,
+        lastPosition: lastPosition(),
         initialConditions: initialConditions,
         state: state,
     };
@@ -197,8 +206,8 @@ var graphics = (function() {
         context.clearRect(0, 0, canvas.width, canvas.height);
         // drawMiddleLine();
         // drawSpring(position);
-        drawBox(positionCar);
-        drawBoxCar(position)
+        drawBox(position);
+        drawBoxCar(positionCar)
     }
 
     function fitToContainer(){
@@ -228,7 +237,7 @@ var simulation = (function() {
     }
 
     async function animate() {
-        // await sleep(300)
+        await sleep(100)
         physics.updatePosition();
         graphics.drawScene(physics.state.position, physics.state.positionCar);
         if(i < 500){
@@ -239,12 +248,14 @@ var simulation = (function() {
     function start() {
         graphics.init(function() {
             physics.resetStateToInitialConditions();
+            // graphics.drawScene(physics.state.position, physics.state.positionCar);
             window.addEventListener('resize', function(event){
                 graphics.fitToContainer();
                 graphics.drawScene(physics.state.position);
             });
-
-            animate();
+            if(i > -1){
+                animate();
+            }
         });
     }
 
@@ -253,4 +264,6 @@ var simulation = (function() {
     };
 })();
 
+simulation.start();
+graphics.drawScene(physics.state.position, physics.state.positionCar);
 
