@@ -38,12 +38,6 @@ $_SESSION['i'] = 0;
          <canvas id="myChart" width="400" height="400" style="max-height: 300px"></canvas>
      </div>
 
-<!--    <script>-->
-<!--        document.querySelector('button').onclick = () => {-->
-<!--            fetch(`api.php?apikey=1234567890&r=${document.querySelector('input').value}`).then(res => res.json()).then(console.log)-->
-<!--        }-->
-<!--    </script>-->
-
      <script src="script.js"></script>
 </body>
 </html>

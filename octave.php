@@ -1,12 +1,16 @@
 <?php
+date_default_timezone_set('Europe/Budapest');
 session_start();
 include 'config.php';
+
+    $log_date = date("d.m.Y H:i");
+    $log_value = $_GET['r'];
 
     $_SESSION['i'] = $_SESSION['i'] + 1;
     $output = [];
     $red = '';
     $r = $_GET['r'];
-    $octave = 'octave-cli --eval "pkg load control;
+    $octave = '2>&1 octave-cli --eval "pkg load control;
         m1 = 2500; m2 = 320;
         k1 = 80000; k2 = 500000;
         b1 = 350; b2 = 15020;
@@ -32,19 +36,29 @@ include 'config.php';
         $redd = $_SESSION['red'];
     }
 
-    exec($octave . '
+        $err = 0;
+
+        exec($octave . '
         r = '.$r.';
         [y,t,x]=lsim(sys*[0;1],r*ones(size(t)),t,'. $redd.');
         kkt = [t, y, x(:,1)];
         kkt
-        "', $output);
+        "', $output, $err);
+
+        $log_isOK = $err == 0;
+        $log_info = $err != 0 ? $output : '';
+        if ($err != 0) $output = [];
 
         exec($octave . '
         r = '.$r.';
         [y,t,x]=lsim(sys*[0;1],r*ones(size(t)),t,'. $redd.');
         x(size(x,1),:)
-        "', $red);
+        "', $red, $err);
         $_SESSION['red'] = parseRed($red);
+
+        $log_isOK = $err == 0 ? 'true' : 'false';
+        $log_info = $err != 0 ? parseErr($red) : '';
+        if ($err != 0) $red = [];
 
     function test_emt_str($var): bool {
         return ($var != '');
@@ -54,3 +68,17 @@ include 'config.php';
         $parsed = array_filter(explode(" ", $str[2]),"test_emt_str");
         return '[' . array_shift($parsed) . ';' . array_shift($parsed) . ';' . array_shift($parsed) . ';' . array_shift($parsed) . ';' . array_shift($parsed) . ']';
     }
+
+    function parseErr($str): string {
+        $parsed = '';
+        foreach ($str as $msg)
+            if ($msg != "")
+            $parsed .= ' ' . $msg;
+        return $parsed;
+    }
+
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stmt = $conn->prepare("insert into logs (`log_date`, `input`, `log_success`, `log_info`) values (?, ? ,? ,?)");
+    $stmt->execute([$log_date, $log_value, $log_isOK, $log_info]);
+
