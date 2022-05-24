@@ -47,7 +47,8 @@ try {
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     $mail->send();
-    header('Location: index.php');
+    echo  json_encode("ok");
+//    header('Location: index.php');
 } catch (Exception $e) {
-    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+    echo json_encode('Message could not be sent');
 }

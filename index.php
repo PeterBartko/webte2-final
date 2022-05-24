@@ -46,11 +46,11 @@ $_SESSION['i'] = 0;
             <div id="div-checkbox">
                 <div class="cb-wrap">
                     <input type="checkbox" id="check-anime" checked="checked" name="anim" value="yes">
-                    <label data-translate="lab2"></label>
+                    <label data-translate="lab2" for="check-anime"></label>
                 </div>
                 <div class="cb-wrap">
                     <input type="checkbox" id="check-graph" checked="checked" name="graf" value="yes">
-                    <label data-translate="lab3"></label>
+                    <label data-translate="lab3" for="check-graph"></label>
                 </div>
             </div>
         </div>
@@ -68,76 +68,23 @@ $_SESSION['i'] = 0;
     <input type="range" id="slider" step="1.0" min="0" max="500" value="0" aria-orientation="horizontal">
 
 </div>
-    <div id="input-calculate">
-        <textarea placeholder="..."></textarea>
-        <button data-translate="but"></button>
-        <textarea id="answer"></textarea>
+    <div id="calculate-div">
+        <div>
+            <h2 data-translate="h2"></h2>
+        </div>
+        <div id="input-calculate">
+            <textarea id="input" placeholder="1+1"></textarea>
+            <button data-translate="but"></button>
+            <textarea id="answer" placeholder="ans =  2"></textarea>
+        </div>
     </div>
+
 <footer>
     <h3 data-translate="names"></h3>
-    <p>Damian Topoli, Peter Bartko, Martin Šefčík &#169;2022</p>
+    <p>Damián Topoli, Peter Bartko, Martin Šefčík &#169;2022</p>
 </footer>
 
-<script src="script2.js"></script>
+<script src="script2.js"></script> <script src="languages.js"></script>
 
-<script>
-    var dictionary = {
-        'h1': {
-            'en': 'Final assignment',
-            'sk': 'Finálne zadanie'
-        },
-        'b1': {
-            'en': 'API docs',
-            'sk': 'API dokumentácia'
-        },
-        'b2': {
-            'en': 'Send logs',
-            'sk': 'Pošli logy'
-        },
-        'lab2': {
-            'en': 'ANIMATION',
-            'sk': 'animácia'
-        },
-        'lab3': {
-            'en': 'GRAPH',
-            'sk': 'GRAF'
-        },
-        'but': {
-            'en': 'Calculate',
-            'sk': 'Vypočítaj'
-        },
-        'butsub': {
-            'en': 'Submit',
-            'sk': 'Potvrď'
-        },
-        'names': {
-            'en': 'Created By: ',
-            'sk': 'Vytvorili: '
-        }
-    };
-    var langs = ['en', 'sk'];
-    var current_lang_index = 0;
-    var current_lang = langs[current_lang_index];
-
-    window.change_lang_en = function() {
-        current_lang_index = 0;
-        current_lang = langs[current_lang_index];
-        translate();
-    }
-    window.change_lang_sk = function() {
-        current_lang_index = 1;
-        current_lang = langs[current_lang_index];
-        translate();
-    }
-
-    function translate() {
-        $("[data-translate]").each(function(){
-            var key = $(this).data('translate');
-            $(this).html(dictionary[key][current_lang] || "N/A");
-        });
-    }
-
-    translate();
-</script>
 </body>
 </html>
