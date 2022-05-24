@@ -21,6 +21,12 @@
 <input type="text" name="r" placeholder="r: ">
 <button type="submit" value="Submit">Submit</button>
 
+
+<script>
+
+</script>
+
+
 <script>
     let dataJson;
     document.querySelector('button').onclick = () => {

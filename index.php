@@ -28,7 +28,7 @@ $_SESSION['i'] = 0;
 <h1>Final Zadanie</h1>
 <div id="div-menu">
     <button>API docs</button>
-    <button>Send logs</button>
+    <button id="send">Send logs</button>
     <label>En/SK</label>
 </div>
 <div id="div-screen">
@@ -61,6 +61,13 @@ $_SESSION['i'] = 0;
 <div>
     <label>Names</label>
 </div>
+
+<script>
+    document.querySelector("#send").onclick = () => document.location.href = "send.php"
+</script>
+
+
+
 <!--<input type="text" name="r" placeholder="r: " value="0.1">
 <div>
     <button type="submit" value="Submit">Submit</button>

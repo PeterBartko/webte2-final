@@ -57,7 +57,7 @@ include 'config.php';
         $_SESSION['red'] = parseRed($red);
 
         $log_isOK = $err == 0 ? 'true' : 'false';
-        $log_info = $err != 0 ? parseErr($red) : '';
+        $log_info = $err != 0 ? parseErr($red) : 'success';
         if ($err != 0) $red = [];
 
     function test_emt_str($var): bool {

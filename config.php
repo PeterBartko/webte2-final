@@ -4,3 +4,4 @@
     $dbname = "final";
     $username = "xtopolid";
     $password = "6lpplQURHzUuyUj";
+    $email = "xbartkop@stuba.sk";
