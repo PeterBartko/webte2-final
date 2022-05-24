@@ -26,62 +26,79 @@ $_SESSION['i'] = 0;
     <title>Webte-final</title>
 </head>
 <body>
-<h1 data-translate="h1"></h1>
-<div id="div-menu">
-    <button data-translate="b1"></button>
-    <button id="send" data-translate="b2"></button>
-    <div>
-        <img src="images/flag_gb.png" onclick="change_lang_en()" height="20px" width="30px" alt="flag_gb">
-        <img src="images/flag_sk.png" onclick="change_lang_sk()" height="20px" width="30px" alt="flag_sk">
-    </div>
-</div>
+    <header>
+        <h1 data-translate="h1"></h1>
+        <div id="div-menu">
+            <button data-translate="b1"></button>
+            <button id="send" data-translate="b2"></button>
+            <div>
+                <img src="images/flag_gb.png" onclick="change_lang_en()" height="20px" width="30px" alt="flag_gb">
+                <img src="images/flag_sk.png" onclick="change_lang_sk()" height="20px" width="30px" alt="flag_sk">
+            </div>
+        </div>
+    </header>
+        <div class="inp-wrap">
+            <div id="input-anime">
+                <input id="r-input" type="text" name="r" placeholder="r: " value="0.1">
+                <button id="r-button" type="submit" value="Submit" data-translate="butsub"></button>
+            </div>
+            <div id="div-checkbox">
+                <div class="cb-wrap">
+                    <input type="checkbox" id="check-anime" checked="checked" name="anim" value="yes">
+                    <label data-translate="lab2"></label>
+                </div>
+                <div class="cb-wrap">
+                    <input type="checkbox" id="check-graph" checked="checked" name="graf" value="yes">
+                    <label data-translate="lab3"></label>
+                </div>
+            </div>
+        </div>
 <div id="div-screen">
-    <div id="input-anime">
-        <input id="r-input" type="text" name="r" placeholder="r: " value="0.1">
-        <div>
-            <button id="r-button" type="submit" value="Submit" data-translate="butsub"></button>
+    <div>
+        <div id="div-animations">
+            <div id="graph-div" style="visibility: visible">
+                <canvas id="myChart" width="400" height="400" style="max-height: 300px"></canvas>
+            </div>
+            <div id="harmon" class="animation-div"  style="visibility: visible">
+                <canvas class="HarmonicOscillator-canvas"></canvas>
+            </div>
         </div>
     </div>
-    <div id="div-checkbox">
-        <input type="checkbox" id="check-anime" checked="checked" name="anim" value="yes">
-        <label data-translate="lab2"></label>
-        <input type="checkbox" id="check-graph" checked="checked" name="graf" value="yes">
-        <label data-translate="lab3"></label>
-    </div>
-    <div id="div-animations">
-        <div id="graph-div" style="visibility: visible">
-            <canvas id="myChart" width="400" height="400" style="max-height: 300px"></canvas>
-        </div>
-        <div id="harmon" class="animation-div"  style="visibility: visible">
-            <canvas class="HarmonicOscillator-canvas"></canvas>
-        </div>
-    </div>
-
     <input type="range" id="slider" step="1.0" min="0" max="500" value="0" aria-orientation="horizontal">
 
+</div>
     <div id="input-calculate">
-        <textarea>...</textarea>
+        <textarea placeholder="..."></textarea>
         <button data-translate="but"></button>
-        <textarea>...</textarea>
+        <div id="answer"></div>
     </div>
-</div>
-<div>
-    <label data-translate="names"></label>
-</div>
+<footer>
+    <h3 data-translate="names"></h3>
+    <p>Damian Topoli, Peter Bartko, Martin Šefčík &#169;2022</p>
+</footer>
 
-<!--<input type="text" name="r" placeholder="r: " value="0.1">
-<div>
-    <button type="submit" value="Submit">Submit</button>
-</div>
-<div class="HarmonicOscillator">
-    <canvas class="HarmonicOscillator-canvas"></canvas>
-</div>
+<script src="script2.js"></script>
 
-<div id="graph-div">
-    <canvas id="myChart" width="400" height="400" style="max-height: 300px"></canvas>
-</div>-->
+    <script>
 
-     <script src="script.js"></script>
+        const answ = document.querySelector('#answer')
+        document.querySelector("#input-calculate button").onclick = () => {
+            const ta = document.querySelector('textarea').value
+            fetch(`api_ta.php?apikey=1234567890&ta=${encodeURIComponent(ta)}`)
+                .then(res => res.json())
+                .then(data => {
+                    answ.innerText = data.answer
+                    answ.style.color = 'black'
+                    if (data.error.isOK === 'false') {
+                        answ.style.color = 'crimson'
+                        answ.innerText = data.error.error_msg
+                    }
+                })
+        }
+
+    </script>
+
+
 <script>
     var dictionary = {
         'h1': {
@@ -113,8 +130,8 @@ $_SESSION['i'] = 0;
             'sk': 'Potvrď'
         },
         'names': {
-            'en': 'Names',
-            'sk': 'Mená'
+            'en': 'Created By: ',
+            'sk': 'Vytvorili: '
         }
     };
     var langs = ['en', 'sk'];

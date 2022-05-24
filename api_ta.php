@@ -1,9 +1,8 @@
 <?php
 include 'config.php';
-
 header('Content-Type: application/json; charset=utf-8');
 
-if (isset($_GET['ta'])) {
+if (isset($_GET['ta'], $_GET['apikey']) && $_GET['apikey'] == $api_key) {
     $ta = $_GET['ta'];
     $ans = [];
     $err = 0;
