@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Technická Dokumentácia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <h1 data-translate="h1"></h1>
+    <div id="div-menu">
+        <a id="a" href="index.php" data-translate="b1"></a>
+        <button id="send" data-translate="b2"></button>
+        <div id="lang">
+            <img src="images/flag_gb.png" onclick="change_lang_en()" height="20px" width="30px" alt="flag_gb">
+            <img src="images/flag_sk.png" onclick="change_lang_sk()" height="20px" width="30px" alt="flag_sk">
+        </div>
+    </div>
+</header>
+
+<section>
+    <h2>Technická Dokumentácia</h2>
+    <ul>
+        <li>Posielanie Mailu: PHPMailer</li>
+        <li>Pri preklade slov: jQuery 1.8.3</li>
+        <li>Graf: jQuery Chart.js
+            <a href="https://www.chartjs.org/docs/latest/">https://www.chartjs.org/docs/latest/</a>
+        </li>
+        <li>Octave</li>
+    </ul>
+
+    <h2>Rozdelenie uloh</h2>
+    <h3>Damian Topoli</h3>
+    <ul>
+        <li>Animacia</li>
+        <li>Instalacia Octave</li>
+        <li>Synchronizacia grafu s animaciou <br> Kende vykreslovanie grafu nieje idealne presnu synchronizaciu vydno len pri spomaleni</li>
+        <li>Generovanie PDF</li>
+    </ul>
+    <h3>Peter Bartko</h3>
+    <ul>
+        <li>API</li>
+        <li>Logovanie do databazy</li>
+        <li>Posialne CSV mailom</li>
+        <li>Design</li>
+    </ul>
+    <h3>Martin Šefčík</h3>
+    <ul>
+        <li>Graf</li>
+        <li>Dvoj jazycnost</li>
+        <li>Dokumentacia</li>
+    </ul>
+    <h3>V Zadani nie je vypracovane</h3>
+    <ul>
+        <li>Docker</li>
+        <li>synchrónne sledovanie experimentovania</li>
+    </ul>
+</section>
+
+
+</body>
+</html>
