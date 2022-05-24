@@ -41,7 +41,7 @@ $_SESSION['i'] = 0;
     </header>
         <div class="inp-wrap">
             <div id="input-anime">
-                <input id="r-input" type="text" name="r" placeholder="r: " value="0.1">
+                <label for="r-input">r:</label><input id="r-input" type="text" name="r" placeholder="r: " value="0.1">
                 <button id="r-button" class="btn" type="submit" value="Submit" data-translate="butsub"></button>
             </div>
             <div id="div-checkbox">
