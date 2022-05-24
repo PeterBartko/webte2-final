@@ -30,7 +30,7 @@ $_SESSION['i'] = 0;
     <header>
         <h1 data-translate="h1"></h1>
         <div id="div-menu">
-            <button data-translate="b1"></button>
+            <a id="a" href="documentation.html" data-translate="b1"></a>
             <button id="send" data-translate="b2"></button>
             <div id="lang">
                 <img src="images/flag_gb.png" onclick="change_lang_en()" height="20px" width="30px" alt="flag_gb">
@@ -41,7 +41,7 @@ $_SESSION['i'] = 0;
         <div class="inp-wrap">
             <div id="input-anime">
                 <input id="r-input" type="text" name="r" placeholder="r: " value="0.1">
-                <button id="r-button" type="submit" value="Submit" data-translate="butsub"></button>
+                <button id="r-button" class="btn" type="submit" value="Submit" data-translate="butsub"></button>
             </div>
             <div id="div-checkbox">
                 <div class="cb-wrap">

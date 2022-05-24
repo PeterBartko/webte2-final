@@ -6,14 +6,34 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
+<header>
+    <h1 data-translate="h1"></h1>
+    <div id="div-menu">
+        <a id="a" href="index.php" data-translate="b1"></a>
+        <button id="send" data-translate="b2"></button>
+        <div id="lang">
+            <img src="images/flag_gb.png" onclick="change_lang_en()" height="20px" width="30px" alt="flag_gb">
+            <img src="images/flag_sk.png" onclick="change_lang_sk()" height="20px" width="30px" alt="flag_sk">
+        </div>
+    </div>
+</header>
 
-    <h1>aaaa</h1>
-    <p>asdadqw</p>
-    <button type="button" value="Download Api" id="button_API">Download Api</button>
+    <section>
+        <h2 data-translate="h2"></h2>
+        <p data-translate="p1"></p>
+        <br>
+        <p data-translate="p2"></p>
+        <p data-translate="p3"></p>
+        <br>
+        <p data-translate="p4"></p>
+        <br>
+        <button class="btn" type="button" value="Download Api" id="button_API" data-translate="b"></button>
+    </section>
 
     <script>
         button = document.querySelector("#button_API")
@@ -21,6 +41,81 @@
             var element = document.querySelector("body")
             html2pdf().from(element).save("API.pdf")
         })
+
+        var dictionary = {
+            'h1': {
+                'en': 'Final assignment',
+                'sk': 'Finálne zadanie'
+            },
+            'h2': {
+                'en': 'Documentation',
+                'sk': 'Dokumentácia'
+            },
+            'b': {
+                'en': 'Download',
+                'sk': 'Stiahni'
+            }
+            ,
+            'b1': {
+                'en': 'Home',
+                'sk': 'Domov'
+            },
+            'b2': {
+                'en': 'Send logs',
+                'sk': 'Pošli logy'
+            },
+            'p1': {
+                'en': 'Final assignment',
+                'sk': 'Zadanie je zamerané na spracovanie údajov cez API z voľne dostupného CAS(Computer Aided System), v našom\n' +
+                    '        prípade softvér Octave. Údaje z Octave je možné získať na našej webstránke cez nami vytvorené API, a to dvoma spôsobmi, pričom pri oboch\n' +
+                    '        budú výstupy poskytnuté užívateľovi len ak zadá správny API kľúč.'
+            },
+            'p2': {
+                'en': 'Final assignment',
+                'sk': 'Pri prvom spôsobe užívateľ zadáva výšku skokovej prekážky. API z ktorej chceme výstup má tvar "api.php?apikey=xxx&r=yyy", kde xxx predstavuje potrebný kľúč a yyy predstavuje výšku.\n' +
+                    '        Ak kľúč je správny a Octave dokáže spracovať požiadavku, API vráti výstup potrebný na vykreslenie animácie. Animácia znázorňuje auto s kolesom, ktoré narazí do prekážky alebo spadne\n' +
+                    '        do diery so zadanou výškou. Hodnoty výšky sa môžu zadávať len v rozmedzí od 0.4 do -0.4, čo predstavuje 40cm vysokú prekážku a 40cm dieru. Popri animácií sa vykresľuje aj graf, ktorý je s ňou synchronizovaný.\n' +
+                    '        Na stránke je možnosť si vybrať, akým spôsobom chcete sledovať výstup. Po zaslaní výšky sa automaticky spustí\n' +
+                    '        animácia s grafom priebehu. Počas animácie nie je možné znova zaslať výšku. Je nutné počkať na dokončenie\n' +
+                    '        animácie. Ako dlho trvá animácia je možné sledovať na slideri pod animáciou. Rýchlosť animácie je možné\n' +
+                    '        meniť pomocou konštanty v konfiguračnom súbore.'
+            },
+            'p3': {
+                'en': 'Final assignment',
+                'sk': 'Druhým spôsobom ako poslať požiadavku na výpočet do API je cez formulár. API od ktorej očakávame výstup má tvar "api_ta.php?apikey=xxx&ta=yyy", kde xxx je kľúč a yyy je požiadavka na Octave. Do textového poľa je možné\n' +
+                    '        zadať ľubovoľný príklad. API vráti výsledok zadaného príkladu. Ak API nevie spracovať danú požiadavku,\n' +
+                    '        vypíše sa chybová hláška.'
+            },
+            'p4': {
+                'en': 'Final assignment',
+                'sk': 'Webstránka ďalej umožňuje posielať históriu zadaných logov na email zadaný v konfiguračnom súbore.\n' +
+                    '        Zaslané logy budú v csv súbore. Stránka je navrhnutá ako dvojjazyčná, tým pádom si môžete zvoliť\n' +
+                    '        medzi slovenským a anglickým jazykom.'
+            }
+        };
+        var langs = ['en', 'sk'];
+        var current_lang_index = 0;
+        var current_lang = langs[current_lang_index];
+
+        window.change_lang_en = function() {
+            current_lang_index = 0;
+            current_lang = langs[current_lang_index];
+            translate();
+        }
+        window.change_lang_sk = function() {
+            current_lang_index = 1;
+            current_lang = langs[current_lang_index];
+            translate();
+        }
+
+        function translate() {
+            $("[data-translate]").each(function(){
+                var key = $(this).data('translate');
+                $(this).html(dictionary[key][current_lang] || "N/A");
+            });
+        }
+
+        translate();
     </script>
 </body>
 </html>

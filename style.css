@@ -68,7 +68,7 @@ h3, footer p {
     cursor: pointer;
 }
 
-#div-menu button {
+#div-menu button, #a {
     font-family: 'Bebas Neue', cursive;
     background: none;
     border: none;
@@ -76,6 +76,7 @@ h3, footer p {
     cursor: pointer;
     text-decoration: underline;
     text-decoration-color: #8bc6ff;
+    color: black;
     transition: color .15s ease-out;
 }
 
@@ -104,7 +105,11 @@ h3, footer p {
     border-radius: .2rem;
 }
 
-#input-anime button {
+section {
+    padding: 1rem;
+}
+
+.btn {
     font-size: 1rem;
     border-radius: .2rem;
     font-weight: bold;
@@ -118,7 +123,7 @@ h3, footer p {
     transition: color .15s ease-out;
 }
 
-#input-anime button:hover {
+.btn:hover {
     color: white;
     background-color: seagreen;
 }
