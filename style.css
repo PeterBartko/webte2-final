@@ -265,6 +265,14 @@ form{
         flex-direction: column;
     }
 
+    #input-calculate {
+        margin-top: 20rem;
+    }
+
+    #input-calculate textarea {
+        max-height: unset;
+    }
+
 }
 
 @media all and (max-width: 500px) {
@@ -278,6 +286,16 @@ form{
 
     footer {
         font-size: 1rem !important;
+    }
+
+    #input-calculate {
+        flex-direction: column;
+        margin-top: 20rem;
+    }
+
+    #input-calculate button {
+        transform: unset;
+        margin: .5rem;
     }
 
 
