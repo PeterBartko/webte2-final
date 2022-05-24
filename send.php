@@ -10,11 +10,12 @@ file_put_contents('logs.csv', '');
 
 $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$stmt = $conn->prepare('select * from logs');
+$stmt = $conn->prepare('select `log_date`, `input`, `log_success`, `log_info` from logs');
 $stmt->execute();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $csv = fopen('logs.csv', 'w');
+fputcsv($csv, ['Date', 'Input', 'isOK', 'Error Info']);
 foreach ($data as $row)
     fputcsv($csv, $row);
 fclose($csv);
@@ -37,7 +38,7 @@ try {
     $mail->addAddress($email, $email);
 
     //Attachments
-    $mail->addAttachment('logs.csv', 'logy.csv');    // Optional name
+    $mail->addAttachment('logs.csv', 'logs.csv');    // Optional name
 
     //Content
     $mail->isHTML(true);                            // Set email format to HTML
@@ -46,7 +47,7 @@ try {
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     $mail->send();
-    header('Location: graf.php');
+    header('Location: index.php');
 } catch (Exception $e) {
     echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
 }

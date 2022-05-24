@@ -22,6 +22,7 @@ $_SESSION['i'] = 0;
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://unpkg.com/konva@8/konva.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="inputs.js" defer></script>
     <link rel="stylesheet" href="style.css">
     <title>Webte-final</title>
 </head>
@@ -31,7 +32,7 @@ $_SESSION['i'] = 0;
         <div id="div-menu">
             <button data-translate="b1"></button>
             <button id="send" data-translate="b2"></button>
-            <div>
+            <div id="lang">
                 <img src="images/flag_gb.png" onclick="change_lang_en()" height="20px" width="30px" alt="flag_gb">
                 <img src="images/flag_sk.png" onclick="change_lang_sk()" height="20px" width="30px" alt="flag_sk">
             </div>
@@ -70,7 +71,7 @@ $_SESSION['i'] = 0;
     <div id="input-calculate">
         <textarea placeholder="..."></textarea>
         <button data-translate="but"></button>
-        <div id="answer"></div>
+        <textarea id="answer"></textarea>
     </div>
 <footer>
     <h3 data-translate="names"></h3>
@@ -78,26 +79,6 @@ $_SESSION['i'] = 0;
 </footer>
 
 <script src="script2.js"></script>
-
-    <script>
-
-        const answ = document.querySelector('#answer')
-        document.querySelector("#input-calculate button").onclick = () => {
-            const ta = document.querySelector('textarea').value
-            fetch(`api_ta.php?apikey=1234567890&ta=${encodeURIComponent(ta)}`)
-                .then(res => res.json())
-                .then(data => {
-                    answ.innerText = data.answer
-                    answ.style.color = 'black'
-                    if (data.error.isOK === 'false') {
-                        answ.style.color = 'crimson'
-                        answ.innerText = data.error.error_msg
-                    }
-                })
-        }
-
-    </script>
-
 
 <script>
     var dictionary = {
