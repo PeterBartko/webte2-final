@@ -59,32 +59,31 @@ function kontrolaVstupu(){
 
 
 submit.onclick = () => {
-    if(!kontrolaVstupu()){
-        return
-    }
+    if(kontrolaVstupu()){
     // Ak animaciu uz neprebieha
-    if(i == -1 || slider.value == 500){
-        arrayR.push(document.getElementById('r-input').value)
-        fetch(`api.php?apikey=1234567890&r=${document.getElementById('r-input').value}`).then(res => res.json()).then(jsondata => {
-            i = 0
-            dataJson = jsondata
-            if(dataJson.length === 0){
-                return
-            }
-            console.log(dataJson)
-            fun();
-            simulation.start();
+        if(i == -1 || slider.value == 500){
+            arrayR.push(document.getElementById('r-input').value)
+            fetch(`api.php?apikey=1234567890&r=${document.getElementById('r-input').value}`).then(res => res.json()).then(jsondata => {
+                i = 0
+                dataJson = jsondata
+                if(dataJson.length === 0){
+                    return
+                }
+                console.log(dataJson)
+                fun();
+                simulation.start();
 
-            if(i !== 0){
-                r = document.getElementById('r-input').value
-            }
-            fetch(`spomalenie.php`).then(res => res.json()).then(jsondata => {
-                spomalenie = parseFloat(jsondata)
+                if(i !== 0){
+                    r = document.getElementById('r-input').value
+                }
+                fetch(`spomalenie.php`).then(res => res.json()).then(jsondata => {
+                    spomalenie = parseFloat(jsondata)
+                })
             })
-        })
-    }else {
-        console.log(document.querySelector("h1").innerText)
-        alert(document.querySelector("h1").innerText === "Final assignment" ? "Animation is not finished yet." : "Animácia ešte neskončila.")
+        }else {
+            console.log(document.querySelector("h1").innerText)
+            alert(document.querySelector("h1").innerText === "Final assignment" ? "Animation is not finished yet." : "Animácia ešte neskončila.")
+        }
     }
 }
 
