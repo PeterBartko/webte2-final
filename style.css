@@ -68,7 +68,7 @@ h3, footer p {
     cursor: pointer;
 }
 
-#div-menu button, #a {
+#div-menu button, .a {
     font-family: 'Bebas Neue', cursive;
     background: none;
     border: none;
@@ -80,7 +80,7 @@ h3, footer p {
     transition: color .15s ease-out;
 }
 
-#div-menu button:hover {
+#div-menu button:hover, .a:hover {
     text-decoration-color: #fff;
 }
 

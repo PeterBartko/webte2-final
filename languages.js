@@ -13,7 +13,7 @@ var dictionary = {
     },
     'lab2': {
         'en': 'ANIMATION',
-        'sk': 'animácia'
+        'sk': 'ANIMÁCIA'
     },
     'lab3': {
         'en': 'GRAPH',
@@ -34,6 +34,10 @@ var dictionary = {
     'h2':{
         'en': 'Octave calculator',
         'sk': 'Octave kalkulačka'
+    },
+    'tech':{
+        'en': 'TECHNICAL DOCS',
+        'sk': 'TECHNICKÁ DOKUMENTÁCIA'
     }
 };
 var langs = ['en', 'sk'];
