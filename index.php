@@ -52,6 +52,9 @@ $_SESSION['i'] = 0;
             <canvas id="myChart" width="400" height="400" style="max-height: 300px"></canvas>
         </div>
     </div>
+
+    <input type="range" id="slider" step="1.0" min="0" max="500" value="0" aria-orientation="horizontal">
+
     <div id="input-calculate">
         <textarea>...</textarea>
         <button>Calculate</button>

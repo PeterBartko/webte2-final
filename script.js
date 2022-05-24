@@ -16,10 +16,14 @@ checkgraph.addEventListener("click", () => {
         graph.style.visibility = "hidden";
     }
 })
+slider = document.getElementById("slider")
 var r = 0;
 var dataJson;
 var i = -1;
 let chart;
+let degrees = 1
+
+let lastR;
 
 function sleep(milliseconds) {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
@@ -152,8 +156,8 @@ async function fun() {
 
 var physics = (function() {
     var initialConditions = {
-        position:       0.1,
-        positionCar:    0.1,
+        position:       0.05,
+        positionCar:    -0.15,
         springConstant: 100.0
     };
 
@@ -173,7 +177,7 @@ var physics = (function() {
     function updatePosition() {
         i++;
         // console.log()
-        console.log(dataJson[i].x1)
+        // console.log(dataJson[i].x1)
         state.positionCar =(state.position + parseFloat(dataJson[i].y)*(-1)) + r;
         state.position = ((parseFloat(dataJson[i].x1))*(-1)+0.1) + r;
 
@@ -189,6 +193,7 @@ var physics = (function() {
         chart.data.datasets[1].data.push(dataJson[i].y);
         chart.update();
 
+        slider.value = i;
         // if (state.position > 1) { state.position = 1; }
         // if (state.position < -1) { state.position = -1; }
     }
@@ -207,11 +212,15 @@ var physics = (function() {
     };
 })();
 
+var canvas = null,
+    context = null
+var   canvasHeight = 500
+
 var graphics = (function() {
-    var canvas = null,
-        context = null,
-        canvasHeight = 400,
-        boxSize = 100,
+    // var canvas = null,
+    //     context = null,
+    //     canvasHeight = 400,
+     var boxSize = 100,
         springInfo = {
             height: 30,
             numberOfSegments: 20
@@ -358,8 +367,24 @@ var graphics = (function() {
         context.clearRect(0, 0, canvas.width, canvas.height);
         // drawMiddleLine();
         // drawSpring(position);
+
         drawBox(position);
         drawBoxCar(positionCar)
+
+        modifyR = document.getElementById('r-input').value*100*1.6
+
+        context.beginPath();
+        context.lineWidth = 2
+        context.moveTo(canvas.width/2 + 80, 10);
+        context.lineTo(canvas.width/2 + 80 - modifyR, 10);
+
+        context.moveTo(canvas.width/2 + 80 - modifyR, 10);
+        context.lineTo(canvas.width/2 + 80 - modifyR, 0)
+
+        context.moveTo(canvas.width/2 + 80, 10);
+        context.lineTo(canvas.width/2 + 80, canvasHeight)
+
+        context.stroke();
     }
 
     function fitToContainer(){
@@ -369,12 +394,12 @@ var graphics = (function() {
         canvas.height = canvas.offsetHeight;
     }
 
-    function init(success) {
-        canvas = document.querySelector(".HarmonicOscillator-canvas");
-        context = canvas.getContext("2d");
-        fitToContainer();
-        success();
-    }
+    // function init(success) {
+    //     canvas = document.querySelector(".HarmonicOscillator-canvas");
+    //     context = canvas.getContext("2d");
+    //     fitToContainer();
+    //     success();
+    // }
 
     return {
         fitToContainer: fitToContainer,
@@ -383,6 +408,11 @@ var graphics = (function() {
     };
 })();
 
+function init() {
+    canvas = document.querySelector(".HarmonicOscillator-canvas");
+    context = canvas.getContext("2d");
+    graphics.fitToContainer();
+}
 
 
 var simulation = (function() {
@@ -397,21 +427,41 @@ var simulation = (function() {
         }
     }
 
-    function start() {
-        graphics.init(async function () {
+    async function start() {
+            init()
             physics.resetStateToInitialConditions();
             graphics.drawScene(physics.state.position, physics.state.positionCar);
             window.addEventListener('resize', function (event) {
                 graphics.fitToContainer();
                 graphics.drawScene(physics.state.position);
             });
+
+            // var startX = boxMiddleX(position) - boxSize / 2;
+
+            // context.beginPath();
+            // context.lineWidth = 2
+            // context.moveTo(canvas.width/2 + 80, 10);
+            // context.lineTo(canvas.width/2 + 80 - document.getElementById('r-input').value*100*4, 10);
+            //
+            // context.moveTo(canvas.width/2 + 80 - document.getElementById('r-input').value*100*4, 10);
+            // context.lineTo(canvas.width/2 + 80 - document.getElementById('r-input').value*100*4, 400)
+            // context.stroke();
+
+
             if (i > -1) {
+                lastR = document.getElementById('r-input').value
+                console.log(lastR)
+                document.getElementById('r-input').value
+                for (let j = 0; j < 500; j++) {
+
+                }
+
                 await sleep(1000)
                 {
                     animate();
                 }
             }
-        });
+        // });
     }
 
     return {
