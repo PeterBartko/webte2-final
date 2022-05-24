@@ -5,3 +5,5 @@
     $username = "xtopolid";
     $password = "6lpplQURHzUuyUj";
     $email = "xbartkop@stuba.sk";
+    #spomalenie v milisekundach
+    $konstanta = 10;

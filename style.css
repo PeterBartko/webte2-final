@@ -197,6 +197,10 @@ textarea {
     color: white;
 }
 
+label:hover{
+    cursor: pointer !important;
+}
+
 #input-calculate {
     display: flex;
     justify-content: center;
@@ -245,6 +249,16 @@ form{
 #slider{
     width: 100%;
     pointer-events: none;
+}
+
+h2{
+    text-align: center;
+}
+
+#calculate-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 @media all and (max-width: 850px) {
