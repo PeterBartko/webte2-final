@@ -15,7 +15,6 @@
     <h1 data-translate="h1"></h1>
     <div id="div-menu">
         <a id="a" href="index.php" data-translate="b1"></a>
-        <button id="send" data-translate="b2"></button>
         <div id="lang">
             <img src="images/flag_gb.png" onclick="change_lang_en()" height="20px" width="30px" alt="flag_gb">
             <img src="images/flag_sk.png" onclick="change_lang_sk()" height="20px" width="30px" alt="flag_sk">
@@ -65,13 +64,15 @@
                 'sk': 'Pošli logy'
             },
             'p1': {
-                'en': 'Final assignment',
+                'en': 'The assignment is focused on data processing via API from a freely available CAS (Computer Aided System), we choose software Octave. Octave data can be retrieved from our website through the APIs, which we have created in two ways, both of this ways will be provided to the user only if he enters the correct API key',
                 'sk': 'Zadanie je zamerané na spracovanie údajov cez API z voľne dostupného CAS(Computer Aided System), v našom\n' +
                     '        prípade softvér Octave. Údaje z Octave je možné získať na našej webstránke cez nami vytvorené API, a to dvoma spôsobmi, pričom pri oboch\n' +
                     '        budú výstupy poskytnuté užívateľovi len ak zadá správny API kľúč.'
             },
             'p2': {
-                'en': 'Final assignment',
+                'en': 'In the first method, the user enters the height of the obstacle. The API from which we want to output has the form "api.php?apikey=xxx&r=yyy", where xxx represents the required key and yyy represents the height. If the key is correct and Octave can process the request, the API returns the output needed to render the animation. The animation shows a car with a wheel that hits an obstacle or falls into a hole with a specified height. Height values can only be entered in the range 0.4 to -0.4, which represents 40cm high obstacle and a 40cm hole. ' +
+                    'Along with animation, a graph is plotted and synchronized with it. On the page is option to choose how you want to watch the output. After sending the height, an animation with a progress graph will start automatically.' +
+                    'It is not possible to resend the height during the animation. You must wait for the animation to complete. How long the animation lasts can be watched on the slider below the animation. The animation speed can be changed using a constant in the configuration file. ',
                 'sk': 'Pri prvom spôsobe užívateľ zadáva výšku skokovej prekážky. API z ktorej chceme výstup má tvar "api.php?apikey=xxx&r=yyy", kde xxx predstavuje potrebný kľúč a yyy predstavuje výšku.\n' +
                     '        Ak kľúč je správny a Octave dokáže spracovať požiadavku, API vráti výstup potrebný na vykreslenie animácie. Animácia znázorňuje auto s kolesom, ktoré narazí do prekážky alebo spadne\n' +
                     '        do diery so zadanou výškou. Hodnoty výšky sa môžu zadávať len v rozmedzí od 0.4 do -0.4, čo predstavuje 40cm vysokú prekážku a 40cm dieru. Popri animácií sa vykresľuje aj graf, ktorý je s ňou synchronizovaný.\n' +
@@ -81,13 +82,13 @@
                     '        meniť pomocou konštanty v konfiguračnom súbore.'
             },
             'p3': {
-                'en': 'Final assignment',
+                'en': 'The second way to send a calculation request to the API is via the form. The API from which we expect output has the form "api_ta.php?apikey=xxx&ta=yyy", where xxx is the key and yyy is the Octave request. You can enter any example in the text box. The API returns the result of the specified example. If the API cannot process the request, an error message is displayed.',
                 'sk': 'Druhým spôsobom ako poslať požiadavku na výpočet do API je cez formulár. API od ktorej očakávame výstup má tvar "api_ta.php?apikey=xxx&ta=yyy", kde xxx je kľúč a yyy je požiadavka na Octave. Do textového poľa je možné\n' +
                     '        zadať ľubovoľný príklad. API vráti výsledok zadaného príkladu. Ak API nevie spracovať danú požiadavku,\n' +
                     '        vypíše sa chybová hláška.'
             },
             'p4': {
-                'en': 'Final assignment',
+                'en': 'The website also allows you to send a history of the specified logs to the email, which is specified in the configuration file. The sent logs will be in a csv file. The site is designed as bilingual, so you can choose between Slovak and English language.',
                 'sk': 'Webstránka ďalej umožňuje posielať históriu zadaných logov na email zadaný v konfiguračnom súbore.\n' +
                     '        Zaslané logy budú v csv súbore. Stránka je navrhnutá ako dvojjazyčná, tým pádom si môžete zvoliť\n' +
                     '        medzi slovenským a anglickým jazykom.'
