@@ -1,5 +1,8 @@
 let checkanime = document.getElementById('check-anime');
 let harmon = document.getElementById('harmon');
+document.querySelector("#send").onclick = () => document.location.href = "send.php"
+
+
 checkanime.addEventListener("click", () => {
     if(checkanime.checked == true){
         harmon.style.visibility = "visible";
@@ -22,7 +25,6 @@ var dataJson;
 var i = -1;
 let chart;
 let degrees = 1
-
 let lastR;
 
 function sleep(milliseconds) {
@@ -156,8 +158,8 @@ async function fun() {
 
 var physics = (function() {
     var initialConditions = {
-        position:       0.05,
-        positionCar:    -0.15,
+        position:       0.1,
+        positionCar:    -0.1,
         springConstant: 100.0
     };
 
@@ -178,7 +180,7 @@ var physics = (function() {
         i++;
         // console.log()
         // console.log(dataJson[i].x1)
-        state.positionCar =(state.position + parseFloat(dataJson[i].y)*(-1)) + r;
+        state.positionCar =(state.position + parseFloat(dataJson[i].y)*(-1)) + r - 0.2;
         state.position = ((parseFloat(dataJson[i].x1))*(-1)+0.1) + r;
 
         // for (let i = 0; i < dataJson.length; i++) {
@@ -389,7 +391,9 @@ var graphics = (function() {
 
     function fitToContainer(){
         canvas.style.width='100%';
+        // canvas.style.height= '100%';
         canvas.style.height= canvasHeight + 'px';
+        // canvas.style.height= '100%';
         canvas.width  = canvas.offsetWidth;
         canvas.height = canvas.offsetHeight;
     }
@@ -411,6 +415,7 @@ var graphics = (function() {
 function init() {
     canvas = document.querySelector(".HarmonicOscillator-canvas");
     context = canvas.getContext("2d");
+    context.rotate(20 * Math.PI / 180);
     graphics.fitToContainer();
 }
 
@@ -433,7 +438,7 @@ var simulation = (function() {
             graphics.drawScene(physics.state.position, physics.state.positionCar);
             window.addEventListener('resize', function (event) {
                 graphics.fitToContainer();
-                graphics.drawScene(physics.state.position);
+                graphics.drawScene(physics.state.position, physics.state.positionCar);
             });
 
             // var startX = boxMiddleX(position) - boxSize / 2;

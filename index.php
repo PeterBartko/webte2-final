@@ -45,11 +45,11 @@ $_SESSION['i'] = 0;
         <label>GRAPH</label>
     </div>
     <div id="div-animations">
-        <div id="harmon" class="HarmonicOscillator" style="visibility: visible">
-            <canvas class="HarmonicOscillator-canvas"></canvas>
-        </div>
         <div id="graph-div" style="visibility: visible">
             <canvas id="myChart" width="400" height="400" style="max-height: 300px"></canvas>
+        </div>
+        <div id="harmon" class="animation-div"  style="visibility: visible">
+            <canvas class="HarmonicOscillator-canvas"></canvas>
         </div>
     </div>
 
@@ -64,12 +64,6 @@ $_SESSION['i'] = 0;
 <div>
     <label>Names</label>
 </div>
-
-<script>
-    document.querySelector("#send").onclick = () => document.location.href = "send.php"
-</script>
-
-
 
 <!--<input type="text" name="r" placeholder="r: " value="0.1">
 <div>
