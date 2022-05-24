@@ -39,16 +39,16 @@ $_SESSION['i'] = 0;
         </div>
     </div>
     <div id="div-checkbox">
-        <input type="checkbox" name="anim" value="yes">
+        <input type="checkbox" id="check-anime" checked="checked" name="anim" value="yes">
         <label>ANIME</label>
-        <input type="checkbox" name="graf" value="yes">
+        <input type="checkbox" id="check-graph" checked="checked" name="graf" value="yes">
         <label>GRAPH</label>
     </div>
     <div id="div-animations">
-        <div class="HarmonicOscillator">
+        <div id="harmon" class="HarmonicOscillator" style="visibility: visible">
             <canvas class="HarmonicOscillator-canvas"></canvas>
         </div>
-        <div id="graph-div">
+        <div id="graph-div" style="visibility: visible">
             <canvas id="myChart" width="400" height="400" style="max-height: 300px"></canvas>
         </div>
     </div>
@@ -61,11 +61,6 @@ $_SESSION['i'] = 0;
 <div>
     <label>Names</label>
 </div>
-
-
-
-
-
 <!--<input type="text" name="r" placeholder="r: " value="0.1">
 <div>
     <button type="submit" value="Submit">Submit</button>

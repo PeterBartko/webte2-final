@@ -1,4 +1,21 @@
-
+let checkanime = document.getElementById('check-anime');
+let harmon = document.getElementById('harmon');
+checkanime.addEventListener("click", () => {
+    if(checkanime.checked == true){
+        harmon.style.visibility = "visible";
+    } else {
+        harmon.style.visibility = "hidden";
+    }
+})
+let checkgraph = document.getElementById('check-graph');
+let graph = document.getElementById('graph-div');
+checkgraph.addEventListener("click", () => {
+    if(checkgraph.checked == true){
+        graph.style.visibility = "visible";
+    } else {
+        graph.style.visibility = "hidden";
+    }
+})
 var r = 0;
 var dataJson;
 var i = -1;
