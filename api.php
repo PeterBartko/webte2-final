@@ -14,7 +14,6 @@ if (isset($_GET['apikey']) && $_GET['apikey'] == $api_key) {
             return $parsed;
         }
 
-
         $json = [];
         foreach ($output as $key => $value) {
             if ($key >= 2 && $key <= 502) {
